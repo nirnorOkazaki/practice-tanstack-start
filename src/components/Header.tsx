@@ -1,13 +1,10 @@
-import { Link } from "@tanstack/react-router";
+import HeaderPC from "./Header/HeaderPC";
 
 export default function Header() {
+
 	return (
-		<header className="fixed w-full">
-			{/* <div className="w-[90%] mx-auto">
-				<h2>
-					<Link to="/">Practice Tanstack</Link>
-				</h2>
-			</div> */}
+		<header className="w-full">
+			<HeaderPC />
 		</header>
 	);
 }
