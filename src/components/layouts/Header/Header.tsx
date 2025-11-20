@@ -1,4 +1,4 @@
-import HeaderPC from "./Header/HeaderPC";
+import HeaderPC from "./HeaderPC";
 
 export default function Header() {
 

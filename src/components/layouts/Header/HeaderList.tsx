@@ -12,12 +12,12 @@ export default function HeaderList({ label, to }: HeaderListProps) {
 	const [isHovered, setIsHovered] = useState(false);
 
 	return (
-		<div className="flex flex-col w-fit h-fit">
+		<div className="text-[min(16px,1.111vw)] leading-[1.5em]">
 			<Link
 				to={to}
-				className="block text-[min(16px,1.111vw)] leading-[1.5em]"
 				onMouseEnter={() => setIsHovered(true)}
 				onMouseLeave={() => setIsHovered(false)}
+				className="flex items-center justify-end"
 			>
 				{label}
 			</Link>

@@ -1,1 +1,25 @@
+@import url('https://fonts.googleapis.com/css2?family=Ibarra+Real+Nova:ital,wght@0,400..700;1,400..700&family=Roboto:ital,wght@0,100..900;1,100..900&family=Shippori+Mincho&family=Zen+Kaku+Gothic+New&display=swap');
 @import "tailwindcss";
+
+@theme {
+    /* Font Family */
+    --font-zen:"Zen Kaku Gothic New", sans-serif;
+    --font-roboto: "Roboto", sans-serif;
+    --font-shippori: "Shippori Mincho", serif;
+    --font-ibarra: "Ibarra Real Nova", serif;
+
+    /* Animation */
+    --animate-slide-flash:slide-flash 5s linear infinite;
+
+    @keyframes slide-flash {
+        0% { opacity: 0; transform: translateY(-150%) }
+        20% { opacity: 1; transform: translateY(0) }
+        30% { opacity: 1; transform: translateY(0) }
+        40% { opacity: 0.2 }
+        50% { opacity: 1 }
+        60% { opacity: 0.2 }
+        70% { opacity: 1; transform: translateY(0) }
+        80% { opacity: 1; transform: translateY(0) }
+        100% { opacity: 0; transform: translateY(150%) }
+    }
+}

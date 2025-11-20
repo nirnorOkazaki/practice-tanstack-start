@@ -10,7 +10,9 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as CalculatorSPIndexRouteImport } from './routes/calculatorSP/index'
 import { Route as CalculatorIndexRouteImport } from './routes/calculator/index'
+import { Route as CalculatorSPCalculatorCardRouteImport } from './routes/calculatorSP/CalculatorCard'
 import { Route as CalculatorCalculatorCardRouteImport } from './routes/calculator/CalculatorCard'
 import { Route as DemoStartServerFuncsRouteImport } from './routes/demo/start.server-funcs'
 import { Route as DemoStartApiRequestRouteImport } from './routes/demo/start.api-request'
@@ -25,11 +27,22 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CalculatorSPIndexRoute = CalculatorSPIndexRouteImport.update({
+  id: '/calculatorSP/',
+  path: '/calculatorSP/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const CalculatorIndexRoute = CalculatorIndexRouteImport.update({
   id: '/calculator/',
   path: '/calculator/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CalculatorSPCalculatorCardRoute =
+  CalculatorSPCalculatorCardRouteImport.update({
+    id: '/calculatorSP/CalculatorCard',
+    path: '/calculatorSP/CalculatorCard',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const CalculatorCalculatorCardRoute =
   CalculatorCalculatorCardRouteImport.update({
     id: '/calculator/CalculatorCard',
@@ -75,7 +88,9 @@ const DemoStartSsrDataOnlyRoute = DemoStartSsrDataOnlyRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/calculator/CalculatorCard': typeof CalculatorCalculatorCardRoute
+  '/calculatorSP/CalculatorCard': typeof CalculatorSPCalculatorCardRoute
   '/calculator': typeof CalculatorIndexRoute
+  '/calculatorSP': typeof CalculatorSPIndexRoute
   '/demo/api/names': typeof DemoApiNamesRoute
   '/demo/start/api-request': typeof DemoStartApiRequestRoute
   '/demo/start/server-funcs': typeof DemoStartServerFuncsRoute
@@ -87,7 +102,9 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/calculator/CalculatorCard': typeof CalculatorCalculatorCardRoute
+  '/calculatorSP/CalculatorCard': typeof CalculatorSPCalculatorCardRoute
   '/calculator': typeof CalculatorIndexRoute
+  '/calculatorSP': typeof CalculatorSPIndexRoute
   '/demo/api/names': typeof DemoApiNamesRoute
   '/demo/start/api-request': typeof DemoStartApiRequestRoute
   '/demo/start/server-funcs': typeof DemoStartServerFuncsRoute
@@ -100,7 +117,9 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/calculator/CalculatorCard': typeof CalculatorCalculatorCardRoute
+  '/calculatorSP/CalculatorCard': typeof CalculatorSPCalculatorCardRoute
   '/calculator/': typeof CalculatorIndexRoute
+  '/calculatorSP/': typeof CalculatorSPIndexRoute
   '/demo/api/names': typeof DemoApiNamesRoute
   '/demo/start/api-request': typeof DemoStartApiRequestRoute
   '/demo/start/server-funcs': typeof DemoStartServerFuncsRoute
@@ -114,7 +133,9 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/calculator/CalculatorCard'
+    | '/calculatorSP/CalculatorCard'
     | '/calculator'
+    | '/calculatorSP'
     | '/demo/api/names'
     | '/demo/start/api-request'
     | '/demo/start/server-funcs'
@@ -126,7 +147,9 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/calculator/CalculatorCard'
+    | '/calculatorSP/CalculatorCard'
     | '/calculator'
+    | '/calculatorSP'
     | '/demo/api/names'
     | '/demo/start/api-request'
     | '/demo/start/server-funcs'
@@ -138,7 +161,9 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/calculator/CalculatorCard'
+    | '/calculatorSP/CalculatorCard'
     | '/calculator/'
+    | '/calculatorSP/'
     | '/demo/api/names'
     | '/demo/start/api-request'
     | '/demo/start/server-funcs'
@@ -151,7 +176,9 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   CalculatorCalculatorCardRoute: typeof CalculatorCalculatorCardRoute
+  CalculatorSPCalculatorCardRoute: typeof CalculatorSPCalculatorCardRoute
   CalculatorIndexRoute: typeof CalculatorIndexRoute
+  CalculatorSPIndexRoute: typeof CalculatorSPIndexRoute
   DemoApiNamesRoute: typeof DemoApiNamesRoute
   DemoStartApiRequestRoute: typeof DemoStartApiRequestRoute
   DemoStartServerFuncsRoute: typeof DemoStartServerFuncsRoute
@@ -170,11 +197,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/calculatorSP/': {
+      id: '/calculatorSP/'
+      path: '/calculatorSP'
+      fullPath: '/calculatorSP'
+      preLoaderRoute: typeof CalculatorSPIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/calculator/': {
       id: '/calculator/'
       path: '/calculator'
       fullPath: '/calculator'
       preLoaderRoute: typeof CalculatorIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/calculatorSP/CalculatorCard': {
+      id: '/calculatorSP/CalculatorCard'
+      path: '/calculatorSP/CalculatorCard'
+      fullPath: '/calculatorSP/CalculatorCard'
+      preLoaderRoute: typeof CalculatorSPCalculatorCardRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/calculator/CalculatorCard': {
@@ -239,7 +280,9 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   CalculatorCalculatorCardRoute: CalculatorCalculatorCardRoute,
+  CalculatorSPCalculatorCardRoute: CalculatorSPCalculatorCardRoute,
   CalculatorIndexRoute: CalculatorIndexRoute,
+  CalculatorSPIndexRoute: CalculatorSPIndexRoute,
   DemoApiNamesRoute: DemoApiNamesRoute,
   DemoStartApiRequestRoute: DemoStartApiRequestRoute,
   DemoStartServerFuncsRoute: DemoStartServerFuncsRoute,
