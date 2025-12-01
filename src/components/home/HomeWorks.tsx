@@ -2,6 +2,7 @@ import HomeWorksList from "@/components/home/HomeWorksList";
 import ViewAllWorks from "@/components/home/ViewAllWorks";
 
 export default function HomeWorks() {
+
 	return (
 		<section className="mt-[min(160px,42.667vw)] md:mt-[min(248px,17.222vw)]">
 			<div className="w-[min(327px,87.2vw)] mx-auto pt-0 pb-[min(240px,64vw)] md:w-[min(1248px,86.667vw)] md:pt-[min(64px,4.444vw)] md:pb-[min(360px,25vw)]">

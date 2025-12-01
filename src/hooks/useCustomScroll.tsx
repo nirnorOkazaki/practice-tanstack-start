@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import VirtualScroll from "virtual-scroll";
+import { useRequestAF } from "@/context/RequestAFProvider";
 import { clamp, lerp, trunc3 } from "@/lib/utils/math";
 
 interface UseCustomScrollbarReturn {
@@ -24,6 +25,8 @@ const scrollOptions = {
 const LERP_FACTOR = 0.05;
 
 export default function useCustomScroll(): UseCustomScrollbarReturn {
+	// context
+	const { subscribe } = useRequestAF();
 	// animation frame id
 	const animationFrameId = useRef<number | null>(null);
 	// scroll state
@@ -76,48 +79,6 @@ export default function useCustomScroll(): UseCustomScrollbarReturn {
 		};
 		window.addEventListener("resize", onResize);
 		onResize();
-
-		/* ==============================
-		 * onUpdate rAF
-		 * ============================== */
-		const onUpdate = () => {
-			if (!containerRef.current || !contentRef.current) return;
-			scrollYRef.current = trunc3(
-				lerp(scrollYRef.current, scrollTargetYRef.current, LERP_FACTOR),
-			);
-			contentRef.current.style.transform = `translateY(${-scrollYRef.current}px)`;
-			// update scrollbar
-			updateScrollbar();
-			// set states
-            setScrollY(scrollYRef.current);
-            setScrollTargetY(scrollTargetYRef.current);
-            setScrollMaxY(scrollMaxYRef.current);
-            animationFrameId.current = requestAnimationFrame(onUpdate);
-		};
-		// update scrollbar function
-		const updateScrollbar = () => {
-			if (
-				!containerRef.current ||
-				!contentRef.current ||
-				!scrollbar.current ||
-				!scrollbarTrack.current ||
-				!scrollbarThumb.current
-			)
-				return;
-			const scrollPercentage =
-				scrollMaxYRef.current > 0
-					? scrollYRef.current / scrollMaxYRef.current
-					: 0;
-			const viewportPercentage =
-				window.innerHeight / containerRef.current.scrollHeight;
-			const thumbHeight = Math.max(viewportPercentage * 100, 5);
-			const thumbPosition = scrollPercentage * (100 - thumbHeight);
-
-			scrollbarThumb.current.style.height = `${thumbHeight}%`;
-			scrollbarThumb.current.style.transform = `translateY(${thumbPosition}vh)`;
-		};
-		animationFrameId.current = requestAnimationFrame(onUpdate);
-
 		/* ==============================
 		 * touch Event
 		 * ============================== */
@@ -265,6 +226,49 @@ export default function useCustomScroll(): UseCustomScrollbarReturn {
             }
         };
 	}, []);
+
+	useEffect(() => {
+		// update scrollbar function
+		const updateScrollbar = () => {
+			if (
+				!containerRef.current ||
+				!contentRef.current ||
+				!scrollbar.current ||
+				!scrollbarTrack.current ||
+				!scrollbarThumb.current
+			)
+				return;
+			const scrollPercentage =
+				scrollMaxYRef.current > 0
+					? scrollYRef.current / scrollMaxYRef.current
+					: 0;
+			const viewportPercentage =
+				window.innerHeight / containerRef.current.scrollHeight;
+			const thumbHeight = Math.max(viewportPercentage * 100, 5);
+			const thumbPosition = scrollPercentage * (100 - thumbHeight);
+
+			scrollbarThumb.current.style.height = `${thumbHeight}%`;
+			scrollbarThumb.current.style.transform = `translateY(${thumbPosition}vh)`;
+		};
+
+		const unsubscribe = subscribe(() => {
+			if (!containerRef.current || !contentRef.current) return;
+			scrollYRef.current = trunc3(
+				lerp(scrollYRef.current, scrollTargetYRef.current, LERP_FACTOR),
+			);
+			contentRef.current.style.transform = `translateY(${-scrollYRef.current}px)`;
+			// update scrollbar
+			updateScrollbar();
+			// set states
+            setScrollY(scrollYRef.current);
+            setScrollTargetY(scrollTargetYRef.current);
+            setScrollMaxY(scrollMaxYRef.current);
+		})
+
+		return () => {
+			unsubscribe();
+		}
+	},[subscribe]);
 
 	return {
 		scrollY,

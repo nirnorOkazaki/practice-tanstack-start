@@ -1,6 +1,7 @@
 import { TanStackDevtools } from '@tanstack/react-devtools'
 import { createRootRoute, HeadContent, Scripts } from '@tanstack/react-router'
 import { TanStackRouterDevtoolsPanel } from '@tanstack/react-router-devtools'
+import { RequestAFProvider } from "@/context/RequestAFProvider";
 import style from '@/styles/style.css?url'
 import Header from '../components/layouts/Header/Header'
 import appCss from '../styles.css?url'
@@ -41,8 +42,10 @@ function RootDocument({ children }: { children: React.ReactNode }) {
         <HeadContent />
       </head>
       <body>
-        <Header />
-        {children}
+        <RequestAFProvider>
+          <Header />
+          {children}
+        </RequestAFProvider>
         {/* <TanStackDevtools
           config={{
             position: 'bottom-right',

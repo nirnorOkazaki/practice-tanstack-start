@@ -11,7 +11,7 @@ export default function ViewAllWorks({ totalWorksCount }: Props) {
 	return (
 		<div>
 			<Link
-				to="/"
+				to="/calculator"
 				onMouseEnter={() => setIsHovered(true)}
 				onMouseLeave={() => setIsHovered(false)}
 				className="flex items-start gap-[min(4px,1.067vw)] w-fit md:gap-[min(8px,0.556vw)]"

@@ -3,9 +3,10 @@ import HomeCategoryTitle from "./HomeCategoryTitle";
 import ViewAllWorks from "./ViewAllWorks";
 
 export default function HomeCategory() {
+
 	return (
-		<section>
-			<div className="w-[min(327px,87.2vw)] md:w-[min(1248px,86.667vw)] mx-auto">
+		<section className="home-category">
+			<div className="relative w-[min(327px,87.2vw)] h-fit md:w-[min(1248px,86.667vw)] mx-auto">
 				{/* Art Direction */}
 				<div className="flex items-center h-screen md:h-fit">
 					<div className="w-fit h-fit md:ml-auto">
@@ -92,10 +93,6 @@ export default function HomeCategory() {
 							</div>
 						</div>
 					</div>
-				</div>
-                {/* View All Works SP */}
-				<div className="block md:hidden w-fit mx-auto">
-					<ViewAllWorks totalWorksCount={30} />
 				</div>
 			</div>
 		</section>
