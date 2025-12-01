@@ -2,9 +2,13 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import HomeAbout from "@/components/home/HomeAbout";
 import HomeCategory from "@/components/home/HomeCategory";
+import HomeCompany from "@/components/home/HomeCompany";
 import HomeKeyVisual from "@/components/home/HomeKeyVisual";
+import HomeMember from "@/components/home/HomeMember";
+import HomeTopics from "@/components/home/HomeTopics";
 import HomeWorks from "@/components/home/HomeWorks";
 import ViewAllWorks from "@/components/home/ViewAllWorks";
+import Footer from "@/components/layouts/Footer/Footer";
 import { useRequestAF } from "@/context/RequestAFProvider";
 import useCustomScroll from "@/hooks/useCustomScroll";
 
@@ -14,13 +18,7 @@ export const Route = createFileRoute("/")({
 
 function App() {
 	const { subscribe } = useRequestAF();
-	const {
-		containerRef,
-		contentRef,
-		scrollbar,
-		scrollbarTrack,
-		scrollbarThumb,
-	} = useCustomScroll();
+	const { containerRef, contentRef, scrollbar, scrollbarTrack, scrollbarThumb } = useCustomScroll();
 
 	/* HomeCategoryコンポーネントのボタンをカスタムスクロールの外から管理する必要があるため、このような記述になってしまう */
 	const homeCategoryRef = useRef<HTMLDivElement | null>(null);
@@ -45,9 +43,15 @@ function App() {
 				<div ref={contentRef}>
 					<HomeKeyVisual />
 					<HomeWorks />
-					<div ref={homeCategoryRef}><HomeCategory /></div>
+					{/* divで囲んでいるのはSP版のViewAllWorksボタンの表示を管理するため */}
+					<div ref={homeCategoryRef}>
+						<HomeCategory />
+					</div>
 					<HomeAbout />
-					<div className="h-[1000px]"></div>
+					<HomeMember />
+					<HomeCompany />
+					<HomeTopics />
+					<Footer />
 				</div>
 			</div>
 
@@ -60,18 +64,10 @@ function App() {
 				</div>
 			</div>
 
-			<section
-				ref={scrollbar}
-				className="hidden md:block fixed top-0 right-0 w-[14px] h-screen bg-[#fafafa] border-l border-[#e7e7e7] z-9999"
-			>
-				<div
-					ref={scrollbarTrack}
-					className="w-full h-full bg-[#fafafa] rounded-[6px]"
-				>
-					<div
-						ref={scrollbarThumb}
-						className="flex w-[80%] min-h-[20px] mx-auto bg-[#c7c7c7] rounded-[6px] hover:bg-[#777777]"
-					></div>
+			{/* Custom Scrollbar */}
+			<section ref={scrollbar} className="hidden md:block fixed top-0 right-0 w-[14px] h-screen bg-[#fafafa] border-l border-[#e7e7e7] z-9999">
+				<div ref={scrollbarTrack} className="w-full h-full bg-[#fafafa] rounded-[6px]">
+					<div ref={scrollbarThumb} className="flex w-[80%] min-h-[20px] mx-auto bg-[#c7c7c7] rounded-[6px] hover:bg-[#777777]"></div>
 				</div>
 			</section>
 		</section>

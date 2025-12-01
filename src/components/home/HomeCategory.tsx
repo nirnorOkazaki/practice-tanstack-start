@@ -1,6 +1,5 @@
-import HomeCategoryList from "./HomeCategoryList";
-import HomeCategoryTitle from "./HomeCategoryTitle";
-import ViewAllWorks from "./ViewAllWorks";
+import {HomeCategoryList, HomeCategoryTitle } from "@/components/home/HomeCategoryComponents";
+import ViewAllWorks from "@/components/home/ViewAllWorks";
 
 export default function HomeCategory() {
 

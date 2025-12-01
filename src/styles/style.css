@@ -3,6 +3,16 @@ html {
     color: #1a1a1a;
 }
 
+a{
+    cursor:pointer;
+    pointer-events: auto;
+}
+
 a:hover{
     opacity: 0.5;
+}
+
+button {
+    cursor:pointer;
+    pointer-events: auto;
 }

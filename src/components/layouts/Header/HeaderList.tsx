@@ -17,7 +17,7 @@ export default function HeaderList({ label, to }: HeaderListProps) {
 				to={to}
 				onMouseEnter={() => setIsHovered(true)}
 				onMouseLeave={() => setIsHovered(false)}
-				className="flex items-center justify-end"
+				className="flex items-center justify-end pointer-events-auto"
 			>
 				{label}
 			</Link>

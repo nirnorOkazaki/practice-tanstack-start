@@ -3,10 +3,10 @@ import HeaderList from "@/components/layouts/Header/HeaderList";
 
 export default function HeaderPC() {
 	return (
-		<section className="hidden md:block fixed top-0 left-0 w-full z-100">
+		<section className="hidden md:block fixed top-0 left-0 w-full z-[9999] pointer-events-none">
 			<div className="flex items-start justify-between w-[min(1248px,86.667vw)] mx-auto pt-[min(72px,5vw)]">
 				<div>
-					<Link to="/" className="w-[min(112px,7.778vw)] h-[min(27px,1.875vw)]">
+					<Link to="/" className="w-[min(112px,7.778vw)] h-[min(27px,1.875vw)] pointer-events-auto">
 						<img
 							src="/img/nirnor-logo.svg"
 							alt="nirnor logo"

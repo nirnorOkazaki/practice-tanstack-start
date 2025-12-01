@@ -1,5 +1,6 @@
 import {
 	HomeAboutOurServiceCarousel,
+	HomeAboutPhilosophyCopy,
 	HomeAboutPhilosophyTextEN,
 	HomeAboutPhilosophyTextJP,
 } from "./HomeAboutComponents";
@@ -22,13 +23,7 @@ export default function HomeAbout() {
 						</h4>
 					</div>
 					<div className="mt-[min(16px,4.267vw)] md:mt-0">
-						<h2 className="font-ibarra font-normal italic text-[min(48px,12.8vw)] leading-[1.066em] md:text-[min(150px,10.417vw)]">
-							eloquently
-							<br />
-							expressed
-							<br className="block md:hidden" />
-							silence
-						</h2>
+						<HomeAboutPhilosophyCopy />
 					</div>
 				</div>
 				{/* Since & Members */}

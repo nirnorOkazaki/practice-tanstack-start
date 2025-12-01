@@ -22,7 +22,7 @@ const scrollOptions = {
 	mouseMultiplier: 0.5,
 };
 
-const LERP_FACTOR = 0.05;
+const LERP_FACTOR = 0.05; // 慣性の強さ : 0〜1 (1に近いほど慣性が弱くなる)
 
 export default function useCustomScroll(): UseCustomScrollbarReturn {
 	// context

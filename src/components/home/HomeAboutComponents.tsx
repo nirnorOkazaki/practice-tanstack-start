@@ -1,6 +1,45 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { motion } from "framer-motion";
+import { useEffect, useMemo, useRef, useState } from "react";
+import { useInView } from "react-intersection-observer";
+
+const HOME_ABOUT_PHILOSOPHY_COPY_PC = "eloquently\nexpressed silence";
+const HOME_ABOUT_PHILOSOPHY_COPY_SP = "eloquently\nexpressed\nsilence";
+
+export function HomeAboutPhilosophyCopy() {
+	const { ref, inView } = useInView({
+		rootMargin: "0px",
+		triggerOnce: true,
+	});
+	const TextPC = useMemo(() => Array.from(HOME_ABOUT_PHILOSOPHY_COPY_PC), []);
+	const TextSP = useMemo(() => Array.from(HOME_ABOUT_PHILOSOPHY_COPY_SP), []);
+	const idsPC = useMemo(() => TextPC.map(() => (typeof crypto !== "undefined" && "randomUUID" in crypto ? crypto.randomUUID() : Math.random().toString(36).slice(2))), [TextPC]);
+	const idsSP = useMemo(() => TextSP.map(() => (typeof crypto !== "undefined" && "randomUUID" in crypto ? crypto.randomUUID() : Math.random().toString(36).slice(2))), [TextSP]);
+
+	return (
+		<div ref={ref}>
+			<div className="hidden md:block">
+				<h2 className="font-ibarra font-normal italic text-[min(150px,10.417vw)] leading-[1.066em] whitespace-pre-wrap">
+					{TextPC.map((char, index) => (
+						<motion.span key={idsPC[index]} animate={{ opacity: inView ? 1 : 0.2 }} transition={{ duration: inView ? 1 : 0, delay: inView ? index * 0.05 : 0 }}>
+							{char}
+						</motion.span>
+					))}
+				</h2>
+			</div>
+			<div className="block md:hidden">
+				<h2 className="font-ibarra font-normal italic text-[min(48px,12.8vw)] leading-[1.066em] whitespace-pre-wrap">
+					{TextSP.map((char, index) => (
+						<motion.span key={idsSP[index]} animate={{ opacity: inView ? 1 : 0.2 }} transition={{ duration: inView ? 1 : 0, delay: inView ? index * 0.05 : 0 }}>
+							{char}
+						</motion.span>
+					))}
+				</h2>
+			</div>
+		</div>
+	);
+}
 
 export function HomeAboutPhilosophyTextJP() {
 	return (
@@ -223,12 +262,12 @@ export function HomeAboutOurServiceCarousel() {
 												<div className="mt-[min(12px,3.2vw)] ml-[min(32px,8.533vw)] md:mt-[min(18px,1.25vw)] md:ml-[min(49px,3.403vw)]">
 													<div className="hidden md:block">
 														<p className="font-zen font-normal text-[min(16px,1.111vw)] leading-[1.75em] whitespace-pre-wrap">
-															<span>{item.descriptionPC}</span>
+															{item.descriptionPC}
 														</p>
 													</div>
 													<div className="block md:hidden">
 														<p className="font-zen font-normal text-[min(14px,3.733vw)] leading-[1.8em] whitespace-pre-wrap">
-															<span>{item.descriptionSP}</span>
+															{item.descriptionSP}
 														</p>
 													</div>
 												</div>
@@ -250,52 +289,3 @@ export function HomeAboutOurServiceCarousel() {
 		</div>
 	);
 }
-
-// export function _HomeAboutPhilosophyTextJP() {
-// 	const TextPC = useMemo(() => Array.from(ABOUT_JP_PC), []);
-// 	const TextSP = useMemo(() => Array.from(ABOUT_JP_SP), []);
-// 	const idsPC = useMemo(
-// 		() =>
-// 			TextPC.map(() =>
-// 				typeof crypto !== "undefined" && "randomUUID" in crypto
-// 					? crypto.randomUUID()
-// 					: Math.random().toString(36).slice(2),
-// 			),
-// 		[TextPC],
-// 	);
-// 	const idsSP = useMemo(
-// 		() =>
-// 			TextSP.map(() =>
-// 				typeof crypto !== "undefined" && "randomUUID" in crypto
-// 					? crypto.randomUUID()
-// 					: Math.random().toString(36).slice(2),
-// 			),
-// 		[TextSP],
-// 	);
-
-// 	return (
-// 		<div>
-// 			<div className="hidden md:block">
-// 				<p className="w-[min(521px,36.181vw)] font-roboto font-normal text-[min(16px,1.111vw)] leading-[1.75em] whitespace-pre-wrap">
-// 					{/* {TextPC.map((char, index) => (
-// 						<motion.span key={idsPC[index]}>{char}</motion.span>
-// 					))} */}
-// 					{TextPC}
-// 				</p>
-// 			</div>
-// 			<div className="block md:hidden">
-// 				<p className="w-[min(327px,87.2vw)] font-roboto font-normal text-[min(14px,3.733vw)] leading-[1.8em] whitespace-pre-wrap">
-// 					{/* {TextSP.map((char, index) => (
-// 						<motion.span key={idsSP[index]}>{char}</motion.span>
-// 					))} */}
-// 					{TextSP}
-// 				</p>
-// 			</div>
-// 		</div>
-// 	);
-// }
-
-// const ABOUT_JP_PC =
-// 	"いつもクライアントのそばで、\n些細なことも安心して相談できる\nそんな「隣人」のような存在となるため2013年に創業。\n\n私たちは、企業・ブランド・アーティスト等、\n全てのクライアントの中にある世界観・課題を丁寧にヒアリングし、\n一貫したコンセプトの元で\n撮影、映像制作、グラフィックデザイン、WEBデザイン等様々な\n表現を用い創造するクリエイティブチームです。";
-// const ABOUT_JP_SP =
-// 	"いつもクライアントのそばで、\n些細なことも安心して相談できる\nそんな「隣人」のような存在となるため\n2013年に創業。\n\n私たちは、企業・ブランド・アーティスト等、\n全てのクライアントの中にある\n世界観・課題を丁寧にヒアリングし、\n一貫したコンセプトの元で\n撮影、映像制作、グラフィックデザイン、\nWEBデザイン等様々な表現を用い創造する\nクリエイティブチームです。";
